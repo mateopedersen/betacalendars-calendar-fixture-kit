@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: nuget-release
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Check tag and project version
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          project_version="$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' src/BetaCalendars.CalendarFixtureKit/BetaCalendars.CalendarFixtureKit.csproj)"
+          test "$version" = "$project_version"
+      - run: dotnet restore BetaCalendars.CalendarFixtureKit.sln
+      - run: dotnet build BetaCalendars.CalendarFixtureKit.sln -c Release --no-restore
+      - run: dotnet test BetaCalendars.CalendarFixtureKit.sln -c Release --no-build
+      - run: dotnet pack src/BetaCalendars.CalendarFixtureKit/BetaCalendars.CalendarFixtureKit.csproj -c Release --no-build -o artifacts
+      - run: python3 scripts/verify_package.py artifacts/BetaCalendars.CalendarFixtureKit.0.1.0.nupkg artifacts/BetaCalendars.CalendarFixtureKit.0.1.0.snupkg
+      - name: Exchange GitHub OIDC token for a short-lived NuGet key
+        uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: ${{ vars.NUGET_USER }}
+      - name: Publish package and symbols
+        run: dotnet nuget push artifacts/BetaCalendars.CalendarFixtureKit.0.1.0.nupkg --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: BetaCalendars.CalendarFixtureKit 0.1.0
+          generate_release_notes: true
+          body: |
+            First release of deterministic calendar fixtures and regression tools for .NET 10.
+
+            Install with `dotnet add package BetaCalendars.CalendarFixtureKit --version 0.1.0`.
+            NuGet package: https://www.nuget.org/packages/BetaCalendars.CalendarFixtureKit/0.1.0
+            See the package README for month grids, validation diagnostics, fixture diffs, JSON snapshots, and `TimeProvider` support.

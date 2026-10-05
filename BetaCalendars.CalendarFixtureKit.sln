@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetaCalendars.CalendarFixtureKit", "src\BetaCalendars.CalendarFixtureKit\BetaCalendars.CalendarFixtureKit.csproj", "{0D894D20-0C78-4A12-9658-E80EC8A2A2AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetaCalendars.CalendarFixtureKit.Tests", "tests\BetaCalendars.CalendarFixtureKit.Tests\BetaCalendars.CalendarFixtureKit.Tests.csproj", "{85E263A6-7655-41CD-8C21-670EB8B3FE50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetaCalendars.CalendarFixtureKit.Benchmarks", "benchmarks\BetaCalendars.CalendarFixtureKit.Benchmarks\BetaCalendars.CalendarFixtureKit.Benchmarks.csproj", "{9FB32292-4894-4149-9DDA-ED6D35A78656}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D894D20-0C78-4A12-9658-E80EC8A2A2AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D894D20-0C78-4A12-9658-E80EC8A2A2AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D894D20-0C78-4A12-9658-E80EC8A2A2AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D894D20-0C78-4A12-9658-E80EC8A2A2AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85E263A6-7655-41CD-8C21-670EB8B3FE50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85E263A6-7655-41CD-8C21-670EB8B3FE50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85E263A6-7655-41CD-8C21-670EB8B3FE50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85E263A6-7655-41CD-8C21-670EB8B3FE50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB32292-4894-4149-9DDA-ED6D35A78656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB32292-4894-4149-9DDA-ED6D35A78656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB32292-4894-4149-9DDA-ED6D35A78656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB32292-4894-4149-9DDA-ED6D35A78656}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
